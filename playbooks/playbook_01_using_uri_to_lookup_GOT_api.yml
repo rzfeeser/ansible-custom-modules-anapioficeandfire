@@ -1,0 +1,22 @@
+---
+- name: Monday playbook - understanding ansible.builtin.uri
+  gather_facts: false
+  connection: ansible.builtin.local
+  hosts: localhost    # don't do this -- you should always reference an inventory!
+
+  tasks:
+    - name: make an api call
+      ansible.builtin.uri:
+        url: https://anapioficeandfire.com/api/books/1
+        method: GET    # default is GET
+      register: roybatty
+
+    - name: display what is in our new var
+      ansible.builtin.debug:
+        var: roybatty.json
+        verbosity: 1   # now you must include -v to see this task
+
+    - name: create an output file
+      ansible.builtin.copy:
+        dest: GOT.json
+        content: "{{ roybatty.json }}"
