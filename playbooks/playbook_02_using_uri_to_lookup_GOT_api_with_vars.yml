@@ -1,0 +1,32 @@
+---
+- name: Tuesday playbook - understanding ansible.builtin.uri
+  gather_facts: false
+  connection: ansible.builtin.local
+  hosts: localhost    # don't do this -- you should always reference an inventory!
+
+  # static vars (dev vars) - you probably don't want to edit these!
+  vars_files:
+    - "vars/playbook_02_vars.yml"
+
+  # dynamic vars (inputs) - set your own values via extra vars (i.e. -e "var=value" at runtime)
+  vars:
+    collection: "books/"
+    resource: "1"
+
+
+  tasks:
+    - name: make an api call
+      ansible.builtin.uri:
+        url: "{{ base_url }}{{ collection }}{{ resource }}"
+        method: GET    # default is GET
+      register: roybatty
+
+    - name: display what is in our new var
+      ansible.builtin.debug:
+        var: roybatty.json
+        verbosity: 1   # now you must include -v to see this task
+
+    - name: create an output file
+      ansible.builtin.copy:
+        dest: "{{ output_file }}"
+        content: "{{ roybatty.json }}"
