@@ -5,5 +5,5 @@
   connection: ansible.builtin.local
 
   roles:
-    - input_prechecks_for_GOT_api        # ensures the data this solution has been given is valid
-    - using_uri_to_lookup_GOT_api        # looks for this in a local roles/ folder
+    - rzfeeser.anapioficeandfire.input_prechecks_for_GOT_api        # ensures the data this solution has been given is valid
+    - rzfeeser.anapioficeandfire.using_uri_to_lookup_GOT_api        # looks for rzfeeser.anapioficeandfire in known search locations
