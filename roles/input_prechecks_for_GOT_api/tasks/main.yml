@@ -1,0 +1,9 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for input_prechecks_for_GOT_api
+- name: Ensure inputs are correct
+  ansible.builtin.assert:
+    that:
+      - collection == "books/" or collection == "characters/" or collection == "houses/"
+    fail_msg: "The provided input for the var 'collection' is not a valid choice!"
+    success_msg: "The provided input for the var 'collection' is confirmed valid."

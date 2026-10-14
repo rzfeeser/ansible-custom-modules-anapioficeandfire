@@ -1,0 +1,5 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for using_uri_to_lookup_GOT_api
+# think of these as developer variables that are not going to change often
+base_url: https://anapioficeandfire.com/api/

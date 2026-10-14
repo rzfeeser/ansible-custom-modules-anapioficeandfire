@@ -1,0 +1,9 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for using_uri_to_lookup_GOT_api
+# anything in here a customer may override with -e
+# and still have a successful operation
+#
+output_file: GOT.json   # this is the file returned JSON will be written to
+collection: "books/"    # other options include "houses/" "characters/"
+resource: "1"           # resources appear after a collection i.e. books/1 or characters/232

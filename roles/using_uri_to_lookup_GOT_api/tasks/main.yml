@@ -1,0 +1,18 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for using_uri_to_lookup_GOT_api
+- name: make an api call
+  ansible.builtin.uri:
+    url: "{{ base_url }}{{ collection }}{{ resource }}"
+    method: GET    # default is GET
+  register: roybatty
+
+- name: display what is in our new var
+  ansible.builtin.debug:
+    var: roybatty.json
+    verbosity: 1   # now you must include -v to see this task
+
+- name: create an output file
+  ansible.builtin.copy:
+    dest: "{{ output_file }}"
+    content: "{{ roybatty.json }}"

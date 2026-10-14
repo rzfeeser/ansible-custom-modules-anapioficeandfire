@@ -1,0 +1,9 @@
+---
+- name: Playbook 03 - Using role
+  gather_facts: false
+  hosts: localhost
+  connection: ansible.builtin.local
+
+  roles:
+    - input_prechecks_for_GOT_api        # ensures the data this solution has been given is valid
+    - using_uri_to_lookup_GOT_api        # looks for this in a local roles/ folder
