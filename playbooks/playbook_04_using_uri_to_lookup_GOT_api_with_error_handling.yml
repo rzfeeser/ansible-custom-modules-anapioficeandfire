@@ -1,0 +1,57 @@
+---
+- name: Tuesday playbook - understanding ansible.builtin.uri
+  gather_facts: false
+  connection: ansible.builtin.local
+  hosts: localhost    # don't do this -- you should always reference an inventory!
+
+  # static vars (dev vars) - you probably don't want to edit these!
+  vars_files:
+    - "vars/playbook_02_vars.yml"
+
+  # dynamic vars (inputs) - set your own values via extra vars (i.e. -e "var=value" at runtime)
+  vars:
+    collection: "books/"
+    resource: "1"
+
+
+  tasks:
+
+  - name: The "block" is what you want to do
+    block:
+      
+      - name: make an api call
+        ansible.builtin.uri:
+          url: "{{ base_url }}{{ collection }}{{ resource }}"
+          method: GET    # default is GET
+        register: roybatty
+
+      - name: display what is in our new var
+        ansible.builtin.debug:
+          var: roybatty.json
+          verbosity: 1   # now you must include -v to see this task
+
+      - name: create a folder to store the output file
+        ansible.builtin.file:
+          state: directory
+          path: output/
+
+      - name: create an output file
+        ansible.builtin.copy:
+          dest: "output/{{ output_file }}"
+          content: "{{ roybatty.json }}"
+
+      - name: cause a failure
+        ansible.builtin.fail:
+
+
+    # do this if something in the block fails
+    rescue:
+
+      - name: remove the folder that was created to store the output file
+        ansible.builtin.file:
+          state: absent
+          path: output/
+
+
+      - name: ROLLBACK COMPLETE - FAIL
+        ansible.builtin.fail:
