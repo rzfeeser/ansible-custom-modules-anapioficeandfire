@@ -17,5 +17,6 @@ dependencies:
   system:
   - openssh-clients
   - sshpass
+  - git
   galaxy: requirements.yml
   python: requirements.txt
