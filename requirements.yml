@@ -1,3 +1,3 @@
 ---
 collections:
-  - rzfeeser.anapioficeandfire
+  - git+https://github.com/rzfeeser/anapioficeandfire
