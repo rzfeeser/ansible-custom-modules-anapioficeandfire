@@ -42,7 +42,7 @@ jobs:
       - name: Install Podman
         run: |
           sudo apt-get update
-          sudo apt-get install -y podman
+          sudo apt-get install -y podman git
 
       - name: Log in to GitHub Container Registry (ghcr.io)
         run: |
